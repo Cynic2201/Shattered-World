@@ -300,6 +300,28 @@ ai_strategy_default = {
 			add = 50
 		}
 		
+		if = {
+			limit = {
+				scope:target_country = {
+					any_state = {
+						scope:target_state = { is_homeland_of_country_cultures = root }
+					}
+				}		
+			}
+			add = 50
+		}
+		
+		if = {
+			limit = {
+				scope:target_country = {
+					any_state = {
+						has_claim_by = root
+					}
+				}		
+			}
+			add = 50
+		}
+		
 		# Higher aggression against pariah countries
 		if = {
 			limit = {
@@ -1797,13 +1819,20 @@ ai_strategy_default = {
 							NOT = { is_adjacent = scope:target_state }
 						}
 						multiply = 0.5
-					}				
+					}
+
+					if = {
+						limit = {
+							is_adjacent = scope:target_state
+						}
+						multiply = 10
+					}
 				
 					if = {
 						limit = {
 							scope:target_state = { is_homeland_of_country_cultures = root }
 						}
-						multiply = 1.25
+						multiply = 5
 					}	
 				}
 			}	
@@ -2000,7 +2029,22 @@ ai_strategy_default = {
 				limit = {
 					scope:target_state = { is_homeland_of_country_cultures = root }
 				}
-				multiply = 1.25
+				multiply = 5
+			}
+			
+			if = {
+				limit = {
+					is_adjacent = scope:target_country
+					NOT = { is_adjacent = scope:target_state }
+				}
+				multiply = 0.5
+			}
+
+			if = {
+				limit = {
+					is_adjacent = scope:target_state
+				}
+				multiply = 10
 			}
 
 			if = {
@@ -2453,7 +2497,7 @@ ai_strategy_default = {
 				limit = {
 					scope:target_state = { is_homeland_of_country_cultures = root }
 				}
-				multiply = 1.25
+				multiply = 2
 			}
 
 			if = {
