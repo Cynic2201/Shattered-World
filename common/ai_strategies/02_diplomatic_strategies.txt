@@ -557,6 +557,7 @@ ai_strategy_economic_imperialism = {
 		
 			if = {
 				limit = {
+					can_reach_target_country = yes
 					scope:target_country = {
 						has_law = law_type:law_isolationism
 					}
@@ -691,6 +692,7 @@ ai_strategy_unify_germany = {
 							}
 						}
 					}
+					can_reach_target_state = yes				
 				}
 				add = 100
 			}
@@ -706,6 +708,7 @@ ai_strategy_unify_germany = {
 							}
 						}	
 					}
+					can_reach_target_state = yes
 				}
 				add = 100
 			}
@@ -870,7 +873,8 @@ ai_strategy_unify_italy = {
 								is_homeland = cu:south_italian
 							}
 						}					
-					}					
+					}	
+					can_reach_target_state = yes
 				}
 				add = 100
 			}
@@ -885,7 +889,8 @@ ai_strategy_unify_italy = {
 								is_homeland = cu:south_italian
 							}
 						}					
-					}					
+					}
+					can_reach_target_state = yes
 				}
 				add = 100
 			}
@@ -1041,7 +1046,8 @@ ai_strategy_unify_ethiopia = {
 								is_homeland = cu:tigray
 							}					
 						}						
-					}								
+					}
+					can_reach_target_state = yes
 				}
 				add = 100
 			}
@@ -1203,6 +1209,7 @@ ai_strategy_unify_china = {
 							}		
 						}
 					}
+					can_reach_target_state = yes
 				}
 				add = 100
 			}
@@ -1218,6 +1225,7 @@ ai_strategy_unify_china = {
 							}
 						}	
 					}
+					can_reach_target_state = yes
 				}
 				add = 100
 			}

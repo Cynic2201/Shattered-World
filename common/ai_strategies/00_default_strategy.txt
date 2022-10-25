@@ -174,7 +174,7 @@ ai_strategy_default = {
 	# Chance each update that the AI is willing to start changing a law (1 = 1%)
 	change_law_chance = { 
 		value = 1
-	}		
+	}
 	
 	# Bravery multiplies the AI's estimation of its own strength, so at bravery 2 it believes its forces to be twice as strong as they actually are
 	# The AI wants to have at least parity in what it believes its own forces to be and what the enemy forces are, so at bravery 2 it's OK with only having 50% of the enemy strength
@@ -489,20 +489,10 @@ ai_strategy_default = {
 	wanted_army_ratio = 200000 # 1 barrack per 200k incorporated population
 	wanted_navy_ratio = 400000 # 1 naval base per 400k coastal incorporated population
 	
-	# Overrides normal subsidies if at war
-	war_subsidies = {
-		building_arms_industry = should_have
-		building_munition_plants = should_have
-		building_shipyards = should_have
-	}
-	
 	subsidies = {
+		building_power_plant = should_have
 		building_railway = should_have
-		building_trade_center = should_have	
-		building_munition_plants = wants_to_have
-		building_arms_industry = wants_to_have
-		building_shipyards = wants_to_have
-		building_paper_mills = wants_to_have
+		building_trade_center = should_have		
 	}
 	
 	goods_stances = {
@@ -542,30 +532,40 @@ ai_strategy_default = {
 			stance = wants_high_supply
 			trigger = {
 				has_technology_researched = navigation
+				NAND = {
+					has_technology_researched = ironclad_tech
+					has_technology_researched = gantry_cranes				
+				}
 				has_port = yes
 				country_rank >= rank_value:major_power
 			}
 		}
-		steamers = {
-			stance = wants_high_supply
-			trigger = {
-				has_technology_researched = ironclad_tech
-				has_port = yes
-				country_rank >= rank_value:major_power
-			}
-		}			
 		manowars = {
 			stance = wants_high_supply
 			trigger = {
 				has_technology_researched = admiralty
+				NAND = {
+					has_technology_researched = ironclad_tech
+					has_technology_researched = gantry_cranes				
+				}
 				has_port = yes
 				country_rank >= rank_value:major_power
 			}
-		}
+		}	
+		steamers = {
+			stance = wants_high_supply
+			trigger = {
+				has_technology_researched = ironclad_tech
+				has_technology_researched = gantry_cranes
+				has_port = yes
+				country_rank >= rank_value:major_power
+			}
+		}			
 		ironclads = {
 			stance = wants_high_supply
 			trigger = {
 				has_technology_researched = ironclad_tech
+				has_technology_researched = gantry_cranes
 				has_port = yes
 				country_rank >= rank_value:major_power				
 			}
@@ -578,10 +578,43 @@ ai_strategy_default = {
 				NOT = { has_law = law_type:law_traditionalism }
 			}
 		}
+		electricity = { 
+			stance = wants_high_supply
+			trigger = {
+				has_technology_researched = electrical_generation
+			}
+		}			
+		coal = { 
+			stance = wants_high_supply
+			trigger = {
+				has_technology_researched = railways
+			}
+		}	
 		engines = { 
 			stance = wants_high_supply
 			trigger = {
 				has_technology_researched = railways
+			}
+		}		
+		dye = { 
+			stance = wants_high_supply 
+			trigger = {
+				has_building = building_textile_mills
+				has_technology_researched = lathe
+			}
+		}
+		silk = { 
+			stance = wants_high_supply 
+			trigger = {
+				has_building = building_textile_mills
+				total_population >= 1000000
+			}
+		}
+		hardwood = { 
+			stance = wants_high_supply 
+			trigger = {
+				has_building = building_furniture_manufacturies
+				total_population >= 1000000
 			}
 		}		
 	}
@@ -1733,14 +1766,7 @@ ai_strategy_default = {
 						who = scope:target_country
 						secret_goal = conquer
 					}					
-					OR = {
-						has_strategic_adjacency = scope:target_state
-						AND = {
-							NOT = { has_strategic_adjacency = scope:target_country }
-							scope:target_state = { is_coastal = yes }
-						}
-					}
-					
+					can_reach_target_state = yes			
 				}
 				add = {
 					value = 20
@@ -1938,7 +1964,7 @@ ai_strategy_default = {
 		}
 		
 		return_state = {
-			value = 250
+			value = 50
 
 			add = {
 				value = scope:target_state.state_population
@@ -1975,7 +2001,14 @@ ai_strategy_default = {
 					scope:target_state = { is_homeland_of_country_cultures = root }
 				}
 				multiply = 1.25
-			}			
+			}
+
+			if = {
+				limit = {
+					can_reach_target_state = no
+				}
+				multiply = 0
+			}
 
 			min = 0
 			max = 200			
@@ -2083,6 +2116,13 @@ ai_strategy_default = {
 				}
 				multiply = 0
 			}
+			
+			if = {
+				limit = {
+					can_reach_target_state = no
+				}
+				multiply = 0
+			}			
 
 			min = 0
 			max = 100			
@@ -2336,6 +2376,7 @@ ai_strategy_default = {
 							type = embargo
 						}	
 					}
+					can_reach_target_country = yes
 				}
 				add = 50
 			}			
