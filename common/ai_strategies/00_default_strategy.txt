@@ -276,10 +276,9 @@ ai_strategy_default = {
 		# Warlord China Thunderdome
 		if = {
 			limit = {
-				has_global_variable = china_shatters
-				has_variable = warlord_state
+				country_has_primary_culture = cu:han
 				scope:target_country = {
-					has_variable = warlord_state
+					country_has_primary_culture = cu:han
 				}
 			}
 			add = 0.5
@@ -293,18 +292,7 @@ ai_strategy_default = {
 			limit = {
 				scope:target_country = {
 					any_state = {
-						has_claim_by = root
-					}
-				}		
-			}
-			add = 50
-		}
-		
-		if = {
-			limit = {
-				scope:target_country = {
-					any_state = {
-						scope:target_state = { is_homeland_of_country_cultures = root }
+						is_homeland_of_country_cultures = root
 					}
 				}		
 			}
@@ -461,13 +449,17 @@ ai_strategy_default = {
 		# Warlord China Thunderdome
 		if = {
 			limit = {
-				has_global_variable = china_shatters
-				has_variable = warlord_state
+				country_has_primary_culture = cu:han
 				scope:target_country = {
-					has_variable = warlord_state
+					OR = {
+						country_has_primary_culture = cu:han
+						any_scope_state = {
+							is_homeland = cu:han
+						}		
+					}
 				}
 			}
-			add = 50
+			add = 100
 		}
 
 		# Veiled Protectorate
@@ -1780,7 +1772,7 @@ ai_strategy_default = {
 	
 	wargoal_scores = {
 		conquer_state = {
-			value = 25
+			value = 0
 
 			if = {
 				limit = {
