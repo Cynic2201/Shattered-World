@@ -77,8 +77,6 @@
 				culture = irish
 				size = 16000
 			}
-		}
-		region_state:IRO = {
 			create_pop = {
 				culture = iroquoian
 				size = 8000
